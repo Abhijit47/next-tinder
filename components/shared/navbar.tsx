@@ -13,8 +13,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ThemeModeToggle } from './theme-mode-toggle';
 
 // Navigation links array to be used in both desktop and mobile menus
@@ -22,10 +23,17 @@ const navigationLinks = [
   { href: '/', label: 'Home', active: true },
   { href: 'discover', label: 'Discover' },
   { href: '/matches', label: 'Matches' },
-  { href: '#', label: 'About' },
+  { href: '/profile', label: 'Profile' },
 ];
 
 export default function Navbar() {
+  const { user } = useUser();
+  const router = useRouter();
+
+  if (!user) {
+    return router.push('/sign-in');
+  }
+
   return (
     <header className='border-b px-4 md:px-6'>
       <div className='flex h-16 justify-between gap-4'>
