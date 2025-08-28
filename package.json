@@ -13,11 +13,13 @@
     "db:studio": "npx drizzle-kit studio",
     "db:dev": "npm run db:generate && npm run db:push",
     "db:seed": "npx tsx ./database/seed.ts",
-    "tunnel": "ngrok http 3000"
+    "tunnel": "ngrok http 3000",
+    "clerk:db": "npx tsx ./scripts/create-fake-profile.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.31.6",
     "@clerk/themes": "^2.4.15",
+    "@faker-js/faker": "^10.0.0",
     "@hookform/resolvers": "^5.2.1",
     "@neondatabase/serverless": "^1.0.1",
     "@radix-ui/react-accordion": "^1.2.12",

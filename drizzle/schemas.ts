@@ -26,6 +26,7 @@ export const users = pgTable(
     fullName: text('full_name').notNull(),
     username: text('username').unique().notNull(),
     email: text('email').unique().notNull(),
+    password: text('password').default(''),
 
     gender: GENDER_ENUMS('male').notNull(),
 

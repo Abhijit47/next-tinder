@@ -22,6 +22,7 @@ CREATE TABLE "users" (
 	"full_name" text NOT NULL,
 	"username" text NOT NULL,
 	"email" text NOT NULL,
+	"password" text DEFAULT '',
 	"male" "gender" NOT NULL,
 	"birthdate" date NOT NULL,
 	"bio" text,
