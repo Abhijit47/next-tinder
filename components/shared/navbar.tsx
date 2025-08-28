@@ -31,7 +31,8 @@ export default function Navbar() {
   const router = useRouter();
 
   if (!user) {
-    return router.push('/sign-in');
+    router.push('/sign-in');
+    return null;
   }
 
   return (

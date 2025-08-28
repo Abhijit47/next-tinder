@@ -33,11 +33,17 @@ export const users = pgTable(
     bio: text('bio'),
     avatarUrl: text('avatar_url'),
 
-    preferences: jsonb('preferences').default({
-      age_range: { min: 18, max: 50 },
-      distance: 25,
-      gender_preference: [],
-    }),
+    preferences: jsonb('preferences')
+      .$type<{
+        age_range: { min: number; max: number };
+        distance: number;
+        gender_preference: string[];
+      }>()
+      .default({
+        age_range: { min: 18, max: 50 },
+        distance: 25,
+        gender_preference: [],
+      }),
 
     locationLat: decimal('location_lat', { precision: 10, scale: 8 }),
     locationLng: decimal('location_lng', { precision: 11, scale: 8 }),
