@@ -1,4 +1,5 @@
 import Navbar from '@/components/shared/navbar';
+import { Toaster } from '@/components/ui/sonner';
 import AuthProvider from '@/providers/auth-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import type { Metadata } from 'next';
@@ -37,6 +38,7 @@ export default function RootLayout({
           <AuthProvider>
             <Navbar />
             {children}
+            <Toaster richColors closeButton />
           </AuthProvider>
         </ThemeProvider>
       </body>
