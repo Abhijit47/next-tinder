@@ -34,18 +34,18 @@ export default function ChatHeader({ user, onVideoCall }: ChatHeaderProps) {
           </button>
 
           <div className='flex items-center space-x-3'>
-            <div className='relative w-12 h-12 rounded-full overflow-hidden'>
+            <div className='relative w-12 h-12'>
               <Image
                 src={
                   user.avatarUrl ??
                   'https://placehold.co/600x400/png?text=No+Image'
                 }
                 alt={user.fullName}
-                className='w-full h-full object-cover'
-                width={48}
-                height={48}
+                className='w-full h-full object-cover rounded-full'
+                width={32}
+                height={32}
               />
-              <div className='absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full'></div>
+              <div className='absolute bottom-0 right-0 z-50 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full'></div>
             </div>
 
             <div>
