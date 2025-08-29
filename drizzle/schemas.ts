@@ -15,12 +15,6 @@ import {
 
 export const GENDER_ENUMS = pgEnum('gender', ['male', 'female', 'other']);
 
-type PreferencesType = {
-  age_range: { min: number; max: number };
-  distance: number;
-  gender_preference: string[];
-};
-
 // ===============================
 // Users Table
 // ===============================
