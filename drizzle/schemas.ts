@@ -120,18 +120,10 @@ export const matches = pgTable(
 
 // User relations: One-to-many for likes, matches
 export const usersRelations = relations(users, ({ many }) => ({
-  sentLikes: many(likes, {
-    relationName: 'sentLikes',
-  }),
-  receivedLikes: many(likes, {
-    relationName: 'receivedLikes',
-  }),
-  matchesAsUser1: many(matches, {
-    relationName: 'matchesAsUser1',
-  }),
-  matchesAsUser2: many(matches, {
-    relationName: 'matchesAsUser2',
-  }),
+  sentLikes: many(likes, { relationName: 'fromUser' }),
+  receivedLikes: many(likes, { relationName: 'toUser' }),
+  matchesAsUser1: many(matches, { relationName: 'user1' }),
+  matchesAsUser2: many(matches, { relationName: 'user2' }),
 }));
 
 // Likes relations: many-to-one for users
