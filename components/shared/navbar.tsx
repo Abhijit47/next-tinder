@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/popover';
 import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ThemeModeToggle } from './theme-mode-toggle';
 
 // import type { Route } from 'next';
@@ -36,8 +37,13 @@ const navigationLinks = [
 
 export default function Navbar() {
   const { user } = useUser();
+  const pathname = usePathname();
 
   if (!user) {
+    return null;
+  }
+
+  if (pathname.startsWith('/chat')) {
     return null;
   }
 
