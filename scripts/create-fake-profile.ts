@@ -196,12 +196,18 @@ async function createFakeProfiles() {
         const newUser = await client.users.createUser({
           emailAddress: [profile.email],
           password: PASSWORD,
+          passwordDigest:
+            '3e23af71b4f9c66fec2ffb818b31d4bf476a66c7af51afc80e01913d3214f448',
+          passwordHasher: 'bcrypt',
           firstName: profile.full_name.split(' ')[0],
           lastName: profile.full_name.split(' ').slice(1).join(' '),
           username: profile.username,
           publicMetadata: {
-            gender: profile.gender,
-            birthdate: profile.birthdate,
+            metadata: {
+              role: 'guest',
+              gender: profile.gender,
+              birthdate: profile.birthdate,
+            },
           },
         });
 

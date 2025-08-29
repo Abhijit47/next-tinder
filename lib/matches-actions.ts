@@ -78,7 +78,7 @@ export async function getUserMatches() {
   }
 }
 
-export async function likeUser({ toUserId }: { toUserId: string }) {
+export async function likeUser(toUserId: string) {
   const user = await currentUser();
 
   if (!user) {
@@ -136,8 +136,11 @@ export async function likeUser({ toUserId }: { toUserId: string }) {
         }
 
         // Optional: fetch matched user details
-        // const [matchedUser] = await trx.select().from(users).where(eq(users.id, toUserId));
-        return { success: true, isMatch: true /*, matchedUser: matchedUser */ };
+        const [matchedUser] = await trx
+          .select()
+          .from(users)
+          .where(eq(users.id, toUserId));
+        return { success: true, isMatch: true, matchedUser: matchedUser };
       }
 
       return { success: true, isMatch: false };
@@ -145,6 +148,6 @@ export async function likeUser({ toUserId }: { toUserId: string }) {
     return { ...commited };
   } catch (error) {
     console.error('Error liking user:', error);
-    return { success: false, error: 'Internal error' };
+    return { success: false, isMatch: false, error: 'Internal error' };
   }
 }

@@ -13,19 +13,30 @@ export async function POST(req: NextRequest) {
         (e) => e.id === evt.data.primary_email_address_id
       )?.email_address;
 
+      const { metadata } = evt.data.public_metadata;
+      console.log('metadata', metadata);
+
+      const isProvidedGender =
+        metadata?.gender === 'male'
+          ? ['female']
+          : metadata?.gender === 'female'
+          ? ['male']
+          : ['other'];
+
       const newUser = {
         id: evt.data.id,
         clerkId: evt.data.id,
         email: email || 'NA',
         fullName: evt.data.first_name + ' ' + evt.data.last_name,
         username: evt.data.username || 'NA',
-        gender: 'other',
-        birthdate: new Date().toISOString(),
+        gender: metadata?.gender ?? 'other',
+        birthdate: metadata?.birthdate || new Date().toISOString(),
         bio: "Hello! I'm new here.",
         avatarUrl: evt.data.image_url,
         preferences: {
           age_range: { min: 18, max: 50 },
           distance: 25,
+          gender_preference: isProvidedGender,
         },
         isVerified: true,
         isOnline: true,
@@ -48,13 +59,12 @@ export async function POST(req: NextRequest) {
         email: email || 'NA',
         fullName: evt.data.first_name + ' ' + evt.data.last_name,
         username: evt.data.username || 'NA',
-        gender: 'other',
-        birthdate: new Date().toISOString(),
         bio: "Hello! I'm new here.",
         avatarUrl: evt.data.image_url,
         preferences: {
           age_range: { min: 18, max: 50 },
           distance: 25,
+          gender_preference: ['male'],
         },
         isVerified: true,
         isOnline: true,
