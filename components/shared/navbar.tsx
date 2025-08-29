@@ -15,7 +15,6 @@ import {
 } from '@/components/ui/popover';
 import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { ThemeModeToggle } from './theme-mode-toggle';
 
 // import type { Route } from 'next';
@@ -37,10 +36,8 @@ const navigationLinks = [
 
 export default function Navbar() {
   const { user } = useUser();
-  const router = useRouter();
 
   if (!user) {
-    router.push('/sign-in');
     return null;
   }
 
