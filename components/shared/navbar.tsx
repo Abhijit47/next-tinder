@@ -32,6 +32,7 @@ const navigationLinks = [
   { href: 'discover', label: 'Discover' },
   { href: '/matches', label: 'Matches' },
   { href: '/profile', label: 'Profile' },
+  { href: '/chat', label: 'Live Chat' },
 ];
 
 export default function Navbar() {
