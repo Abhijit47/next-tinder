@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
       )?.email_address;
 
       const newUser = {
+        id: evt.data.id,
         clerkId: evt.data.id,
         email: email || 'NA',
         fullName: evt.data.first_name + ' ' + evt.data.last_name,
@@ -44,7 +45,6 @@ export async function POST(req: NextRequest) {
         (e) => e.id === evt.data.primary_email_address_id
       )?.email_address;
       const updateUser = {
-        clerkId: evt.data.id,
         email: email || 'NA',
         fullName: evt.data.first_name + ' ' + evt.data.last_name,
         username: evt.data.username || 'NA',

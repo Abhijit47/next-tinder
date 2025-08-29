@@ -17,7 +17,7 @@ CREATE TABLE "matches" (
 );
 --> statement-breakpoint
 CREATE TABLE "users" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"id" text PRIMARY KEY NOT NULL,
 	"clerk_id" text NOT NULL,
 	"full_name" text NOT NULL,
 	"username" text NOT NULL,
@@ -41,10 +41,10 @@ CREATE TABLE "users" (
 	CONSTRAINT "users_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
-ALTER TABLE "likes" ADD CONSTRAINT "likes_from_user_id_users_clerk_id_fk" FOREIGN KEY ("from_user_id") REFERENCES "public"."users"("clerk_id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "likes" ADD CONSTRAINT "likes_to_user_id_users_clerk_id_fk" FOREIGN KEY ("to_user_id") REFERENCES "public"."users"("clerk_id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "matches" ADD CONSTRAINT "matches_user1_id_users_clerk_id_fk" FOREIGN KEY ("user1_id") REFERENCES "public"."users"("clerk_id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "matches" ADD CONSTRAINT "matches_user2_id_users_clerk_id_fk" FOREIGN KEY ("user2_id") REFERENCES "public"."users"("clerk_id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "likes" ADD CONSTRAINT "likes_from_user_id_users_id_fk" FOREIGN KEY ("from_user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "likes" ADD CONSTRAINT "likes_to_user_id_users_id_fk" FOREIGN KEY ("to_user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "matches" ADD CONSTRAINT "matches_user1_id_users_id_fk" FOREIGN KEY ("user1_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "matches" ADD CONSTRAINT "matches_user2_id_users_id_fk" FOREIGN KEY ("user2_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 CREATE UNIQUE INDEX "likes_unique" ON "likes" USING btree ("from_user_id","to_user_id");--> statement-breakpoint
 CREATE INDEX "idx_likes_from_user" ON "likes" USING btree ("from_user_id");--> statement-breakpoint
 CREATE INDEX "idx_likes_to_user" ON "likes" USING btree ("to_user_id");--> statement-breakpoint

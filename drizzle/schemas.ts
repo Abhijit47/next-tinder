@@ -15,13 +15,19 @@ import {
 
 export const GENDER_ENUMS = pgEnum('gender', ['male', 'female', 'other']);
 
+type PreferencesType = {
+  age_range: { min: number; max: number };
+  distance: number;
+  gender_preference: string[];
+};
+
 // ===============================
 // Users Table
 // ===============================
 export const users = pgTable(
   'users',
   {
-    id: uuid('id').primaryKey().unique().defaultRandom().notNull(),
+    id: text('id').primaryKey().unique().notNull(),
     clerkId: text('clerk_id').unique().notNull(),
     fullName: text('full_name').notNull(),
     username: text('username').unique().notNull(),
@@ -35,11 +41,7 @@ export const users = pgTable(
     avatarUrl: text('avatar_url'),
 
     preferences: jsonb('preferences')
-      .$type<{
-        age_range: { min: number; max: number };
-        distance: number;
-        gender_preference: string[];
-      }>()
+      .$type<PreferencesType>()
       .default({
         age_range: { min: 18, max: 50 },
         distance: 25,
@@ -76,10 +78,10 @@ export const likes = pgTable(
     id: uuid('id').primaryKey().unique().defaultRandom().notNull(),
     fromUserId: text('from_user_id')
       .notNull()
-      .references(() => users.clerkId, { onDelete: 'cascade' }),
+      .references(() => users.id, { onDelete: 'cascade' }),
     toUserId: text('to_user_id')
       .notNull()
-      .references(() => users.clerkId, { onDelete: 'cascade' }),
+      .references(() => users.id, { onDelete: 'cascade' }),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
   },
   (t) => [
@@ -99,10 +101,10 @@ export const matches = pgTable(
     id: uuid('id').primaryKey().unique().defaultRandom().notNull(),
     user1Id: text('user1_id')
       .notNull()
-      .references(() => users.clerkId, { onDelete: 'cascade' }),
+      .references(() => users.id, { onDelete: 'cascade' }),
     user2Id: text('user2_id')
       .notNull()
-      .references(() => users.clerkId, { onDelete: 'cascade' }),
+      .references(() => users.id, { onDelete: 'cascade' }),
     isActive: boolean('is_active').default(true),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
   },
@@ -120,23 +122,15 @@ export const matches = pgTable(
 export const usersRelations = relations(users, ({ many }) => ({
   sentLikes: many(likes, {
     relationName: 'sentLikes',
-    // fields: [users.id],
-    // references: [likes.fromUserId],
   }),
   receivedLikes: many(likes, {
     relationName: 'receivedLikes',
-    // fields: [users.id],
-    // references: [likes.toUserId],
   }),
   matchesAsUser1: many(matches, {
     relationName: 'matchesAsUser1',
-    // fields: [users.id],
-    // references: [matches.user1Id],
   }),
   matchesAsUser2: many(matches, {
     relationName: 'matchesAsUser2',
-    // fields: [users.id],
-    // references: [matches.user2Id],
   }),
 }));
 

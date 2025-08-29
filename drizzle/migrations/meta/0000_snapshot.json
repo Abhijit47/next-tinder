@@ -1,5 +1,5 @@
 {
-  "id": "c5617798-fd04-4435-9f98-c6ec8654bad6",
+  "id": "95295105-c3b3-4e97-b572-aba810604d76",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -104,28 +104,28 @@
         }
       },
       "foreignKeys": {
-        "likes_from_user_id_users_clerk_id_fk": {
-          "name": "likes_from_user_id_users_clerk_id_fk",
+        "likes_from_user_id_users_id_fk": {
+          "name": "likes_from_user_id_users_id_fk",
           "tableFrom": "likes",
           "tableTo": "users",
           "columnsFrom": [
             "from_user_id"
           ],
           "columnsTo": [
-            "clerk_id"
+            "id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "likes_to_user_id_users_clerk_id_fk": {
-          "name": "likes_to_user_id_users_clerk_id_fk",
+        "likes_to_user_id_users_id_fk": {
+          "name": "likes_to_user_id_users_id_fk",
           "tableFrom": "likes",
           "tableTo": "users",
           "columnsFrom": [
             "to_user_id"
           ],
           "columnsTo": [
-            "clerk_id"
+            "id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -252,28 +252,28 @@
         }
       },
       "foreignKeys": {
-        "matches_user1_id_users_clerk_id_fk": {
-          "name": "matches_user1_id_users_clerk_id_fk",
+        "matches_user1_id_users_id_fk": {
+          "name": "matches_user1_id_users_id_fk",
           "tableFrom": "matches",
           "tableTo": "users",
           "columnsFrom": [
             "user1_id"
           ],
           "columnsTo": [
-            "clerk_id"
+            "id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "matches_user2_id_users_clerk_id_fk": {
-          "name": "matches_user2_id_users_clerk_id_fk",
+        "matches_user2_id_users_id_fk": {
+          "name": "matches_user2_id_users_id_fk",
           "tableFrom": "matches",
           "tableTo": "users",
           "columnsFrom": [
             "user2_id"
           ],
           "columnsTo": [
-            "clerk_id"
+            "id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -299,10 +299,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "clerk_id": {
           "name": "clerk_id",

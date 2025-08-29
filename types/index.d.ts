@@ -1,3 +1,8 @@
+declare type PreferencesType = {
+  age_range: { min: number; max: number };
+  distance: number;
+  gender_preference: string[];
+};
 declare interface UserProfile {
   id: string;
   full_name: string;
