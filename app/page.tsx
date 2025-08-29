@@ -25,7 +25,7 @@ export default async function Home() {
             {user ? (
               <div className='flex flex-col sm:flex-row gap-4 justify-center'>
                 <Link
-                  href='/matches'
+                  href='/discover'
                   className='inline-flex items-center px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-lg font-semibold rounded-full hover:from-pink-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1'>
                   Start Discovering
                   <svg

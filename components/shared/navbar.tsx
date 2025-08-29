@@ -18,6 +18,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ThemeModeToggle } from './theme-mode-toggle';
 
+// import type { Route } from 'next';
+
+// type NavItem<T extends string = string> = {
+//   href: T;
+//   label: string;
+//   active?: boolean;
+// };
+
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
   { href: '/', label: 'Home', active: true },
