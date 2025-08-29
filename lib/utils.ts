@@ -39,3 +39,7 @@ export function formatTime(timestamp: string) {
     return date.toLocaleDateString();
   }
 }
+
+export function formatChatTime(date: Date) {
+  return date.toLocaleDateString([], { hour: '2-digit', minute: '2-digit' });
+}

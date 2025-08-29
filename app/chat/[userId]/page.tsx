@@ -4,8 +4,9 @@ import { InsertUser } from '@/drizzle/schemas';
 import { getUserMatches } from '@/lib/matches-actions';
 import { useUser } from '@clerk/nextjs';
 import { useParams, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ChatHeader from './_components/chat-header';
+import StreamChatInterface from './_components/stream-chat-interface';
 
 export default function LiveChatPage() {
   const [otherUser, setOtherUser] = useState<InsertUser | null>(null);
@@ -14,6 +15,8 @@ export default function LiveChatPage() {
   const params = useParams<{ userId: string }>();
   const { user } = useUser();
   const userId = params.userId;
+
+  const chatInterfaceRef = useRef<{ handleVideoCall: () => void } | null>(null);
 
   useEffect(() => {
     async function loadUserData() {
@@ -84,13 +87,12 @@ export default function LiveChatPage() {
         <ChatHeader
           user={otherUser}
           onVideoCall={() => {
-            // chatInterfaceRef.current?.handleVideoCall();
+            chatInterfaceRef.current?.handleVideoCall();
           }}
         />
 
         <div className='flex-1 min-h-0'>
-          {/* <StreamChatInterface otherUser={otherUser} ref={chatInterfaceRef} /> */}
-          StreamChat
+          <StreamChatInterface otherUser={otherUser} ref={chatInterfaceRef} />
         </div>
       </div>
     </div>
