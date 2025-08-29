@@ -42,6 +42,28 @@ export default function MatchesPage() {
     );
   }
 
+  if (error) {
+    return (
+      <div className='min-h-screen bg-gradient-to-br from-pink-50 to-red-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center'>
+        <div className='text-center max-w-md p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg'>
+          <h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-4'>
+            Oops!
+          </h2>
+          <p className='text-gray-600 dark:text-gray-400 mb-6'>{error}</p>
+          <button
+            onClick={() => {
+              setLoading(true);
+              setError(null);
+              setMatches([]);
+            }}
+            className='bg-gradient-to-r from-pink-500 to-red-500 text-white font-semibold py-2 px-4 rounded-full hover:from-pink-600 hover:to-red-600 transition-all duration-200'>
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className='min-h-screen bg-gradient-to-br from-pink-50 to-red-50 dark:from-gray-900 dark:to-gray-800'>
       <div className='container mx-auto px-4 py-8'>
