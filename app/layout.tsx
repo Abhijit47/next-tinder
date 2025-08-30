@@ -9,6 +9,7 @@ import './globals.css';
 import { Analytics } from '@/components/analytics';
 import { env } from '@/env';
 import { Databuddy } from '@databuddy/sdk/react';
+import { Suspense } from 'react';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -65,7 +66,10 @@ export default function RootLayout({
             <Toaster richColors closeButton />
           </AuthProvider>
         </ThemeProvider>
-        <Analytics />
+
+        <Suspense fallback={null} name='analytics'>
+          <Analytics />
+        </Suspense>
       </body>
     </html>
   );
