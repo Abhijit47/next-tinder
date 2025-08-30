@@ -25,6 +25,7 @@ export default function MatchCard({ user }: { user: InsertUser }) {
                 </h2>
                 <p className='text-sm opacity-90 mb-2'>@{user.username}</p>
                 <p className='text-sm leading-relaxed'>{user.bio}</p>
+                <p className='text-sm leading-relaxed'>{user.gender}</p>
               </div>
             </div>
           </div>
