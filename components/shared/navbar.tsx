@@ -14,6 +14,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs';
+import { track } from '@databuddy/sdk';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeModeToggle } from './theme-mode-toggle';
@@ -131,10 +132,28 @@ export default function Navbar() {
           </SignedIn>
           <SignedOut>
             <Button asChild variant='ghost' size='sm' className='text-sm'>
-              <Link href='/sign-in'>Sign In</Link>
+              <Link
+                href='/sign-in'
+                onClick={() => {
+                  track('button_click', {
+                    button_text: 'Sign In',
+                    location: 'header',
+                  });
+                }}>
+                Sign In
+              </Link>
             </Button>
             <Button asChild size='sm' className='text-sm'>
-              <Link href='/sign-up'>Get Started</Link>
+              <Link
+                href='/sign-up'
+                onClick={() => {
+                  track('button_click', {
+                    button_text: 'Get Started',
+                    location: 'header',
+                  });
+                }}>
+                Get Started
+              </Link>
             </Button>
           </SignedOut>
         </div>

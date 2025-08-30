@@ -6,6 +6,10 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
+import { Analytics } from '@/components/analytics';
+import { env } from '@/env';
+import { Databuddy } from '@databuddy/sdk/react';
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -30,6 +34,26 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Databuddy
+          clientId={env.NEXT_PUBLIC_DATABUDDY_CLIENT_ID}
+          // Core tracking
+          trackScreenViews={true}
+          trackHashChanges={true}
+          trackSessions={true}
+          // Interaction tracking
+          trackAttributes={true}
+          trackOutgoingLinks={true}
+          trackInteractions={true}
+          // Performance tracking
+          trackPerformance={true}
+          trackWebVitals={true}
+          // Optimization
+          enableBatching={true}
+          batchSize={10}
+          batchTimeout={2000}
+          // Development
+          disabled={process.env.NODE_ENV !== 'production'}
+        />
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
@@ -41,6 +65,7 @@ export default function RootLayout({
             <Toaster richColors closeButton />
           </AuthProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

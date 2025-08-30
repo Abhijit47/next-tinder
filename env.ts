@@ -26,6 +26,7 @@ export const env = createEnv({
     NEXT_PUBLIC_DEV_BASE_URL: z.url(),
     NEXT_PUBLIC_PROD_BASE_URL: z.url(),
     NEXT_PUBLIC_STREAM_API_KEY: z.string().min(1),
+    NEXT_PUBLIC_DATABUDDY_CLIENT_ID: z.string().min(1),
   },
   // If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
   // runtimeEnv: {
@@ -41,5 +42,7 @@ export const env = createEnv({
     NEXT_PUBLIC_DEV_BASE_URL: process.env.NEXT_PUBLIC_DEV_BASE_URL,
     NEXT_PUBLIC_PROD_BASE_URL: process.env.NEXT_PUBLIC_PROD_BASE_URL,
     NEXT_PUBLIC_STREAM_API_KEY: process.env.NEXT_PUBLIC_STREAM_API_KEY,
+    NEXT_PUBLIC_DATABUDDY_CLIENT_ID:
+      process.env.NEXT_PUBLIC_DATABUDDY_CLIENT_ID,
   },
 });
