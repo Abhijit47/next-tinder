@@ -40,7 +40,9 @@ export default function StreamChatInterface({
   otherUser: InsertUser;
   ref: RefObject<{ handleVideoCall: () => void } | null>;
 }) {
+  // eslint-disable-next-line
   const [loading, setLoading] = useState(true);
+  // eslint-disable-next-line
   const [error, setError] = useState<string | null>(null);
   const [currentUserId, setCurrentUserId] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
